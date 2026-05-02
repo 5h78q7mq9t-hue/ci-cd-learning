@@ -10,5 +10,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Say Hello
-        run: echo "Hello from GitHub Actions!"
+      - name: Show OS info
+        run: uname -a
+
+      - name: Show current user
+        run: whoami
+
+      - name: Show working directory
+        run: pwd
+
+      - name: Create a file and read it
+        run: |
+          echo "Hello from step 1" > test.txt
+          cat test.txt
