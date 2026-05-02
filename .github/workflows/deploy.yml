@@ -16,7 +16,7 @@ jobs:
       - name: Run tests
         run: |
           echo "Running tests..."
-          echo "All tests passed!"
+          exit 1
 
   deploy:
     runs-on: ubuntu-latest
