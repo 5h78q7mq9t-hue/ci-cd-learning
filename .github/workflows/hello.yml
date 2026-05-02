@@ -1,25 +1,29 @@
 name: Hello World
+
 on:
   push:
     branches:
       - main
+
+env:
+  MY_NAME: "Alex"
+  APP_ENV: "production"
+
 jobs:
   say-hello:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show OS info
-        run: uname -a
-
-      - name: Show current user
-        run: whoami
-
-      - name: Show working directory
-        run: pwd
-
-      - name: Create a file and read it
+      - name: Use environment variables
         run: |
-          echo "Hello from step 1" > test.txt
-          cat test.txt
+          echo "Hello, $MY_NAME!"
+          echo "Environment: $APP_ENV"
+
+      - name: GitHub built-in variables
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF_NAME"
+          echo "Commit SHA: $GITHUB_SHA"
