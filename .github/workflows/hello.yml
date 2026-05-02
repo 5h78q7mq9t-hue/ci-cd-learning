@@ -27,3 +27,10 @@ jobs:
           echo "Repository: $GITHUB_REPOSITORY"
           echo "Branch: $GITHUB_REF_NAME"
           echo "Commit SHA: $GITHUB_SHA"
+
+      - name: Use secret
+        run: |
+          echo "My secret is: ${{ secrets.MY_SECRET_PASSWORD }}"
+          echo "Length of secret: ${#MY_SECRET}"
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET_PASSWORD }}
