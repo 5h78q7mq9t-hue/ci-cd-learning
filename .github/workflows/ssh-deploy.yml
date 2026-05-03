@@ -13,26 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check secret
-        run: |
-          echo "Secret length:"
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c
-
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Debug SSH key
-        run: |
-          echo "Key file size:"
-          wc -c ~/.ssh/id_ed25519
-          echo "First line of key:"
-          head -1 ~/.ssh/id_ed25519
-          echo "Last line of key:"
-          tail -1 ~/.ssh/id_ed25519
 
       - name: Deploy to VPS
         run: |
