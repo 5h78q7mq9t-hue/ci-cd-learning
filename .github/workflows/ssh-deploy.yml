@@ -23,7 +23,6 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-            echo 'Connected to server!'
-            whoami
-            pwd
+            echo 'Deployed at $(date)' > /home/user/deploy.log
+            cat /home/user/deploy.log
           "
